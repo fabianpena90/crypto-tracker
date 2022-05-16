@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import axios from "axios";
 import Coin from './Coin';
 import Search from './Search';
 import Spinner from '../layout/Spinner';
+import { axiosInstance } from '../utils/axiosInstance';
 
 const Coins = ({ title }) => {
   const [coins, setCoins] = useState([]);
@@ -12,12 +12,12 @@ const Coins = ({ title }) => {
   useState(() => {
     const getCrypto = async () => {
       try {
-        const res = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false");
+        const {data } = await axiosInstance.get("api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=200&page=1&sparkline=false")
         if(!loading) {
           <Spinner />
         } else {
           setLoading(false);
-          setCoins(res.data)
+          setCoins(data)
         }
       } catch (error) {
         throw new Error(error);

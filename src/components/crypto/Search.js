@@ -9,7 +9,7 @@ const Search = ({ handleChange }) => {
   return (
     <form onSubmit={onSubmit} className="d-flex">
       <input 
-        type="search" 
+        type="text" 
         className="form-control me2" 
         placeholder="Search"
         onChange={handleChange}

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import ExchangeItem from "../crypto/ExchangeItem";
+import { axiosInstance } from "../utils/axiosInstance";
 
 const Exchanges = () => {
   const [exchanges, setExchanges] = useState([]);
   useEffect(() => {
     const getExchanges = async () => {
       try {
-        const res = await axios.get(
-          "https://api.coingecko.com/api/v3/exchanges"
-        );
-        setExchanges(res.data);
+        const { data } = await axiosInstance("api/v3/exchanges")
+        setExchanges(data);
       } catch (err) {
         throw new Error(err);
       }
